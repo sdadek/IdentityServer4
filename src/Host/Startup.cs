@@ -51,16 +51,17 @@ namespace Host
 
                     options.Events.RaiseSuccessEvents = true;
                     options.Events.RaiseFailureEvents = true;
+                    options.Events.RaiseErrorEvents = true;
                 })
-            .AddInMemoryClients(Clients.Get())
-            .AddInMemoryIdentityResources(Resources.GetIdentityResources())
-            .AddInMemoryApiResources(Resources.GetApiResources())
-            .AddDeveloperSigningCredential()
-            .AddExtensionGrantValidator<Extensions.ExtensionGrantValidator>()
-            .AddExtensionGrantValidator<Extensions.NoSubjectExtensionGrantValidator>()
-            .AddSecretParser<ClientAssertionSecretParser>()
-            .AddSecretValidator<PrivateKeyJwtSecretValidator>()
-            .AddTestUsers(TestUsers.Users);
+                .AddInMemoryClients(Clients.Get())
+                .AddInMemoryIdentityResources(Resources.GetIdentityResources())
+                .AddInMemoryApiResources(Resources.GetApiResources())
+                .AddDeveloperSigningCredential()
+                .AddExtensionGrantValidator<Extensions.ExtensionGrantValidator>()
+                .AddExtensionGrantValidator<Extensions.NoSubjectExtensionGrantValidator>()
+                .AddSecretParser<ClientAssertionSecretParser>()
+                .AddSecretValidator<PrivateKeyJwtSecretValidator>()
+                .AddTestUsers(TestUsers.Users);
 
             services.AddMvc();
 
@@ -88,6 +89,7 @@ namespace Host
                 AuthenticationScheme = "demoidsrv",
                 SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme,
                 SignOutScheme = IdentityServerConstants.SignoutScheme,
+                AutomaticChallenge = false,
                 DisplayName = "IdentityServer",
                 Authority = "https://demo.identityserver.io/",
                 ClientId = "implicit",
@@ -109,6 +111,7 @@ namespace Host
                 AuthenticationScheme = "aad",
                 SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme,
                 SignOutScheme = IdentityServerConstants.SignoutScheme,
+                AutomaticChallenge = false,
                 DisplayName = "AAD",
                 Authority = "https://login.windows.net/4ca9cb4c-5e5f-4be9-b700-c532992a3705",
                 ClientId = "96e3c53e-01cb-4244-b658-a42164cb67a9",
@@ -129,6 +132,7 @@ namespace Host
                 AuthenticationScheme = "adfs",
                 SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme,
                 SignOutScheme = IdentityServerConstants.SignoutScheme,
+                AutomaticChallenge = false,
                 DisplayName = "ADFS",
                 Authority = "https://adfs.leastprivilege.vm/adfs",
                 ClientId = "c0ea8d99-f1e7-43b0-a100-7dee3f2e5c3c",
